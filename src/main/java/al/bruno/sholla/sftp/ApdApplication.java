@@ -13,8 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class ApdApplication {
 
 	
-	@Autowired
-	private callWebServices callws;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApdApplication.class, args);
@@ -23,7 +22,7 @@ public class ApdApplication {
 	
 	@Scheduled(fixedRateString ="${leje.ditore.time.ms}", initialDelay=1000)
      public void work() throws IOException {
-		 callws.callLejeDitore();
+		
      }
 
 }
