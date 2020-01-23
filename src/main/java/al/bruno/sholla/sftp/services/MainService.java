@@ -22,5 +22,10 @@ public class MainService {
 	@Value("${SFTP.password}")
 	private String SFTPPassword;
 	
+	@Value("${local.log.path}")
+	private String localLogPath;
+	
+	@Value("${local.log.name}")
+	private String localLogName;
 
 }
