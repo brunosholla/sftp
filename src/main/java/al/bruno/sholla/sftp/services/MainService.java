@@ -7,7 +7,6 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-
 public class MainService {
 
 	@Value("${execution.time.ms}")
@@ -34,8 +33,12 @@ public class MainService {
 	@Value("${local.log.name}")
 	private String localLogName;
 
-	public ChannelSftp setupJsch() throws JSchException {
+	public MainService() {
 		
+	}
+
+	public ChannelSftp setupJsch() throws JSchException {
+
 		JSch jsch = new JSch();
 		jsch.setKnownHosts("C:\\Users\\User\\.ssh\\known_hosts");
 		Session jschSession = jsch.getSession(SFTPUsername, SFTPHostname);
