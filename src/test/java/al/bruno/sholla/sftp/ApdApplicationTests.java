@@ -30,17 +30,10 @@ public class ApdApplicationTests {
 
 	@Test
 	public void test() throws IOException {
-		String comm = " ssh-keygen -F " + app.getSFTPHostname();
-		System.err.println(Runtime.getRuntime().exec(comm).getInputStream().read());
-		if (Runtime.getRuntime().exec(comm).getInputStream().read() < 0) {
-			String addSFTPtoKnownHosts = "cd \"" + System.getProperty("user.home") + "\\.ssh\""
-					+ " && ssh-keyscan -H -t rsa " + app.getSFTPHostname() + " >> known_hosts";
-			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", addSFTPtoKnownHosts);
-
-			builder.redirectErrorStream(true);
-			builder.start();
-		}
+		mainServices.uploadFile();
 
 	}
+
+	
 
 }

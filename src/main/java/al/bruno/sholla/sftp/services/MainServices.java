@@ -1,6 +1,9 @@
 package al.bruno.sholla.sftp.services;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import com.jcraft.jsch.ChannelSftp;
@@ -9,19 +12,19 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 
-@Service
+@Service("mainServices")
 public class MainServices {
 
 	@Autowired
 	public ApplicationProperties ap;
-	
+
 	@Autowired
 	public cmd cmd;
 
 	private ChannelSftp setupJsch() throws JSchException {
 
 		JSch jsch = new JSch();
-		jsch.setKnownHosts("C:\\Users\\User\\.ssh\\known_hosts");
+		jsch.setKnownHosts(System.getProperty("user.home")+"\\.ssh\\known_hosts");
 		Session jschSession = jsch.getSession(ap.getSFTPUsername(), ap.getSFTPHostname());
 		jschSession.setPassword(ap.getSFTPPassword());
 		jschSession.connect();
@@ -37,7 +40,7 @@ public class MainServices {
 			channelSftp.connect();
 
 			try {
-				channelSftp.put(ap.getLocalCSVPath(),ap.getRemoteCSVPath());
+				channelSftp.put(ap.getLocalCSVPath(), ap.getRemoteCSVPath());
 			} catch (SftpException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -51,4 +54,27 @@ public class MainServices {
 
 	}
 
+	public void addHostToKnown() throws IOException {
+		
+		if (!SFTPaddedToKnownFolder()) {
+			String addSFTPtoKnownHosts = "cd \"" + System.getProperty("user.home") + "\\.ssh\""
+					+ " && ssh-keyscan -H -t rsa " + ap.getSFTPHostname() + " >> known_hosts";
+			ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", addSFTPtoKnownHosts);
+
+			builder.redirectErrorStream(true);
+			builder.start();
+		}
+	}
+	
+	public boolean SFTPaddedToKnownFolder(){
+		
+		String comm = " ssh-keygen -F " + ap.getSFTPHostname();
+		System.err.println(comm);
+		try {
+			return Runtime.getRuntime().exec(comm).getInputStream().read() > 0;
+		} catch (IOException e) {
+			return true;
+		}
+		
+	}
 }
