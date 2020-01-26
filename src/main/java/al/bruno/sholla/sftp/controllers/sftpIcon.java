@@ -116,7 +116,7 @@ public class sftpIcon {
 		JTextField Username = new JTextField(applicationProperties.getSFTPUsername());
 		JTextField localCSVPath = new JTextField(applicationProperties.getLocalCSVPath());
 		JTextField localLOGPath = new JTextField(applicationProperties.getLocalLogPath());
-		JTextField executionTIMEms = new JTextField(applicationProperties.getExecutionTimeMS().toString());
+		JTextField executionTIMEms = new JTextField(mainServices.getDurationBreakdown(applicationProperties.getExecutionTimeMS()));
 
 		Object[] message = { "Hostname:", Hostname, "Username:", Username, "CSV Path:", localCSVPath, "LOG Path:",
 				localLOGPath,"Scheduling time (ms)",executionTIMEms
