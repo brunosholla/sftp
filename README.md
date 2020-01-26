@@ -1,2 +1,1 @@
-# xatlass
 # sftp
