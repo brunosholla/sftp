@@ -2,6 +2,8 @@ package al.bruno.sholla.sftp;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -28,6 +30,7 @@ public class SFTPApplication {
 	public SFTPApplication(MainServices mainServices, sftpIcon sftpIcon) {
 		SFTPApplication.mainServices = mainServices;
 		SFTPApplication.sftpIcon = sftpIcon;
+
 	}
 
 	public static ConfigurableApplicationContext context;
@@ -38,19 +41,26 @@ public class SFTPApplication {
 		builder.headless(false);
 		context = builder.run(args);
 
-		boolean alreadyExecuted = false;
-		if (!alreadyExecuted) {
+		if (!mainServices.SFTPaddedToKnownFolder()) {
+			try {
+				mainServices.addHostToKnown();
 
-			sftpIcon.createAndShowTray();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-			alreadyExecuted = true;
 		}
 
 	}
 
-	@Scheduled(fixedRateString = "${execution.time.ms}", initialDelay = 1000)
-	public void work() throws IOException {
+	@Scheduled(fixedRateString = "${execution.time.ms}", initialDelay = 5000)
+	public void work() throws Exception {
+
+		Thread.sleep(5000);
+		sftpIcon.createAndShowTray();
 		mainServices.uploadFile();
+
 	}
 
 }

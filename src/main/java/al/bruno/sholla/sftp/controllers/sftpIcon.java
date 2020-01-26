@@ -1,9 +1,7 @@
 package al.bruno.sholla.sftp.controllers;
 
 import java.awt.AWTException;
-import java.awt.CheckboxMenuItem;
 import java.awt.Image;
-import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -11,9 +9,6 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -40,6 +35,7 @@ public class sftpIcon {
 
 	public void createAndShowTray() throws Exception {
 
+		System.err.println("createAndShowTray()");
 		// Check the SystemTray is supported
 		if (!SystemTray.isSupported()) {
 			System.out.println("SystemTray is not supported");
@@ -47,6 +43,7 @@ public class sftpIcon {
 		}
 
 		if (!mainServices.SFTPaddedToKnownFolder()) {
+			//mainServices.addHostToKnown();
 			img = image_error;
 		} else {
 			img = image;

@@ -78,7 +78,7 @@ public class MainServices {
 	public boolean SFTPaddedToKnownFolder(){
 		
 		String comm = " ssh-keygen -F " + ap.getSFTPHostname();
-		System.err.println(comm);
+		//System.err.println(comm);
 		try {
 			return Runtime.getRuntime().exec(comm).getInputStream().read() > 0;
 		} catch (IOException e) {
