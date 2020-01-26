@@ -1,14 +1,18 @@
 package al.bruno.sholla.sftp;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import al.bruno.sholla.sftp.controllers.sftpIcon;
 import al.bruno.sholla.sftp.services.ApplicationProperties;
+import al.bruno.sholla.sftp.services.MainServices;
 
 @EnableScheduling
 @EnableConfigurationProperties(ApplicationProperties.class)
@@ -18,8 +22,11 @@ public class ApdApplication {
 	@Autowired
 	private static sftpIcon sftpIcon;
 
-	public ApdApplication(sftpIcon sftpIcon) {
+	@Autowired
+	private static MainServices mainServices;
 
+	public ApdApplication(MainServices mainServices, sftpIcon sftpIcon) {
+		ApdApplication.mainServices = mainServices;
 		ApdApplication.sftpIcon = sftpIcon;
 	}
 
@@ -41,10 +48,9 @@ public class ApdApplication {
 
 	}
 
-	/*
-	 * @Scheduled(fixedRateString ="${execution.time.ms}", initialDelay=1000) public
-	 * void work() throws IOException {
-	 * 
-	 * }
-	 */
+	@Scheduled(fixedRateString = "${execution.time.ms}", initialDelay = 1000)
+	public void work() throws IOException {
+		mainServices.uploadFile();
+	}
+
 }
