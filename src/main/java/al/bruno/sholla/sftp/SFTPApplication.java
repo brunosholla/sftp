@@ -17,7 +17,7 @@ import al.bruno.sholla.sftp.services.MainServices;
 @EnableScheduling
 @EnableConfigurationProperties(ApplicationProperties.class)
 @SpringBootApplication(scanBasePackages = { "al.bruno.sholla.sftp" })
-public class ApdApplication {
+public class SFTPApplication {
 
 	@Autowired
 	private static sftpIcon sftpIcon;
@@ -25,16 +25,16 @@ public class ApdApplication {
 	@Autowired
 	private static MainServices mainServices;
 
-	public ApdApplication(MainServices mainServices, sftpIcon sftpIcon) {
-		ApdApplication.mainServices = mainServices;
-		ApdApplication.sftpIcon = sftpIcon;
+	public SFTPApplication(MainServices mainServices, sftpIcon sftpIcon) {
+		SFTPApplication.mainServices = mainServices;
+		SFTPApplication.sftpIcon = sftpIcon;
 	}
 
 	public static ConfigurableApplicationContext context;
 
 	public static void main(String[] args) throws Exception {
 
-		SpringApplicationBuilder builder = new SpringApplicationBuilder(ApdApplication.class);
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(SFTPApplication.class);
 		builder.headless(false);
 		context = builder.run(args);
 

@@ -20,7 +20,7 @@ import al.bruno.sholla.sftp.services.MainServices;
 import al.bruno.sholla.sftp.services.cmd;
 
 @SpringBootTest
-public class ApdApplicationTests {
+public class SFTPApplicationTests {
 
 	@Autowired
 	MainServices mainServices;

@@ -10,11 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<packaging>jar</packaging>
-	<groupId>al.tetra.al</groupId>
-	<artifactId>apd</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>apd</name>
-	<description>Demo project for Spring Boot</description>
+	<groupId>al.bruno.sholla</groupId>
+	<artifactId>sftp</artifactId>
+	<version>0.0.1</version>
+	<name>sftp</name>
+	<description>Upload files in SFTP server</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -67,8 +67,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>  <!-- added -->
-					<layout>ZIP</layout> <!-- to use PropertiesLaunchar qe te modifikohet application.properties brenda 
-						ne .jar -->
+					<layout>ZIP</layout> <!-- to use PropertiesLaunchar qe te modifikohet application.properties brenda ne .jar -->
 				</configuration>
 			</plugin>
 		</plugins>
