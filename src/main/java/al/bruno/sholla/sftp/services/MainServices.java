@@ -2,6 +2,8 @@ package al.bruno.sholla.sftp.services;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class MainServices {
 	@Autowired
 	public cmd cmd;
 
+	 Logger logger = LoggerFactory.getLogger(MainServices.class);
+	    
+	
 	private ChannelSftp setupJsch() throws JSchException {
 
 		JSch jsch = new JSch();
@@ -40,9 +45,12 @@ public class MainServices {
 			channelSftp.connect();
 
 			try {
+				
 				channelSftp.put(ap.getLocalCSVPath(), ap.getRemoteCSVPath());
+				logger.error("File u uploadua me sukses");
 			} catch (SftpException e) {
 				// TODO Auto-generated catch block
+				logger.error("Ndodhi nje error gjate upladimit");
 				e.printStackTrace();
 			}
 

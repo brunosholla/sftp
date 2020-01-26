@@ -10,16 +10,19 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import al.bruno.sholla.sftp.controllers.sftpIcon;
 import al.bruno.sholla.sftp.services.ApplicationProperties;
 
-
 @EnableScheduling
 @EnableConfigurationProperties(ApplicationProperties.class)
 @SpringBootApplication(scanBasePackages = { "al.bruno.sholla.sftp" })
 public class ApdApplication {
 
-
 	@Autowired
-	sftpIcon sftpIcon;
-	
+	private static sftpIcon sftpIcon;
+
+	public ApdApplication(sftpIcon sftpIcon) {
+
+		ApdApplication.sftpIcon = sftpIcon;
+	}
+
 	public static ConfigurableApplicationContext context;
 
 	public static void main(String[] args) throws Exception {
@@ -30,8 +33,9 @@ public class ApdApplication {
 
 		boolean alreadyExecuted = false;
 		if (!alreadyExecuted) {
-			 sftpIcon sftpIcon = new sftpIcon();
-			 sftpIcon.createTrayIcon();
+
+			sftpIcon.createAndShowTray();
+
 			alreadyExecuted = true;
 		}
 

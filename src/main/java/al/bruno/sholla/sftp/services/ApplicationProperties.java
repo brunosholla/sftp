@@ -7,10 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties
 public class ApplicationProperties {
 
-	public ApplicationProperties() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	@Value("${execution.time.ms}")
 	private Long executionTimeMS;
@@ -36,7 +32,7 @@ public class ApplicationProperties {
 	@Value("${SFTP.channelType}")
 	private String SFTPChannelType;
 
-	@Value("${local.log.path}")
+	@Value("${logging.file.name}")
 	private String localLogPath;
 
 	public Long getExecutionTimeMS() {
