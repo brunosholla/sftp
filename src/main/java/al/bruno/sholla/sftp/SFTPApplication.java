@@ -37,7 +37,7 @@ public class SFTPApplication {
 
 	public static void main(String[] args) throws Exception {
 
-		SpringApplicationBuilder builder = new SpringApplicationBuilder(SFTPApplication.class);
+		SpringApplicationBuilder builder = new SpringApplicationBuilder(SFTPApplication.class); 
 		builder.headless(false);
 		context = builder.run(args);
 
