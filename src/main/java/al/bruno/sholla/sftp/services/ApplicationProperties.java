@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties
 public class ApplicationProperties {
 
-
 	@Value("${execution.time.ms}")
 	private Long executionTimeMS;
 
@@ -34,6 +33,9 @@ public class ApplicationProperties {
 
 	@Value("${logging.file.name}")
 	private String localLogPath;
+
+	@Value("${SFTP.work.with}")
+	private String SFTPWorkWith;
 
 	public Long getExecutionTimeMS() {
 		return executionTimeMS;
@@ -106,5 +108,15 @@ public class ApplicationProperties {
 	public void setLocalLogPath(String localLogPath) {
 		this.localLogPath = localLogPath;
 	}
+
+	public String getSFTPWorkWith() {
+		return SFTPWorkWith;
+	}
+
+	public void setSFTPWorkWith(String sFTPWorkWith) {
+		SFTPWorkWith = sFTPWorkWith;
+	}
+	
+	
 
 }

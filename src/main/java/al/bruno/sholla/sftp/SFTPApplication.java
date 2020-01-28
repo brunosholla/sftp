@@ -26,10 +26,14 @@ public class SFTPApplication {
 
 	@Autowired
 	private static MainServices mainServices;
+	
+	@Autowired
+	public static ApplicationProperties ap;
 
-	public SFTPApplication(MainServices mainServices, sftpIcon sftpIcon) {
+	public SFTPApplication(MainServices mainServices, sftpIcon sftpIcon,ApplicationProperties ap) {
 		SFTPApplication.mainServices = mainServices;
 		SFTPApplication.sftpIcon = sftpIcon;
+		SFTPApplication.ap = ap;
 
 	}
 
@@ -59,6 +63,7 @@ public class SFTPApplication {
 
 		Thread.sleep(5000);
 		sftpIcon.createAndShowTray();
+		if(ap.getSFTPWorkWith().equals("file"))
 		mainServices.uploadFile();
 
 	}
